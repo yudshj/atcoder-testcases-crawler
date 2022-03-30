@@ -1,0 +1,9 @@
+.mypy_cache
+*.json
+*.txt
+*.ipynb
+*.idea
+*.pkl
+*.png
+*.ipynb
+.DS_Store
