@@ -11,8 +11,11 @@ def wrapper(token: str, arg_list, queue: multiprocessing.Queue):
     dbx = dropbox.Dropbox(token)
 
     for (dropbox_path, download_path) in arg_list:
-        dbx.files_download_to_file(download_path, dropbox_path)
-        queue.put(dropbox_path)
+        try:
+            dbx.files_download_to_file(download_path, dropbox_path)
+            queue.put(dropbox_path)
+        except Exception as e:
+            print(e)
 
 
 def main():
