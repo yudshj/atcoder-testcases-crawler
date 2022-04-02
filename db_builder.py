@@ -13,8 +13,10 @@ if __name__ == '__main__':
         raise Exception('task_list.json not found')
 
     sql = sqlite.connect('task_list_db.sqlite')
+    # sql.execute('DROP TABLE IF EXISTS TASKS')
     sql.execute('CREATE TABLE IF NOT EXISTS TASKS (DROPBOX_PATH TEXT PRIMARY KEY, DOWNLOAD_PATH TEXT, STATUS INT)')
     for (download_path, dropbox_path) in tasks:
+        pathlib.Path(download_path).parent.mkdir(parents=True, exist_ok=True)
         sql.execute('INSERT INTO TASKS VALUES (?, ?, ?)', (dropbox_path, download_path, 0))
     sql.commit()
     sql.close()
