@@ -6,4 +6,5 @@
 *.pkl
 *.png
 *.ipynb
+*.sqlite
 .DS_Store
