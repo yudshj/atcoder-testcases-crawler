@@ -10,9 +10,9 @@ import pathlib
 def wrapper(token: str, arg_list, queue: multiprocessing.Queue):
     dbx = dropbox.Dropbox(token)
 
-    for arg in tqdm(arg_list):
-        dbx.files_download_to_file(*arg)
-        queue.put(arg[0])
+    for (dropbox_path, download_path) in tqdm(arg_list):
+        dbx.files_download_to_file(download_path, dropbox_path)
+        queue.put(dropbox_path)
 
 
 def main():
